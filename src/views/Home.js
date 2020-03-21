@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Box from "@material-ui/core/Box";
-import Container from "@material-ui/core/Container";
 import Fab from "@material-ui/core/Fab";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import Zoom from "@material-ui/core/Zoom";
@@ -13,6 +12,8 @@ import AppbarSignUp from "../components/AppbarSignUp";
 import HomeGrid1 from "../components/HomeGrid1";
 import HomeGrid2 from "../components/HomeGrid2";
 import HomeGrid3 from "../components/HomeGrid3";
+import HomeGrid4 from "../components/HomeGrid4";
+import Footer from "../components/Footer";
 
 const baseColor = orange[500];
 
@@ -76,6 +77,8 @@ export default function Home(props) {
         <HomeGrid1 color={baseColor} />
         <HomeGrid2 color={baseColor} />
         <HomeGrid3 color={baseColor} />
+        <HomeGrid4 color={baseColor} />
+        <Footer color={baseColor} />
       </Box>
       <ScrollTop {...props}>
         <Fab

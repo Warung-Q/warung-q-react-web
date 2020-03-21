@@ -1,13 +1,7 @@
 import React from "react";
-import {
-  Grid,
-  Box,
-  Typography,
-  Card,
-  CardMedia,
-  Hidden
-} from "@material-ui/core";
-import photo1 from "../assets/images/photo-of-apples-in-box-1837425.jpg";
+import { Grid, Box, Typography, Hidden } from "@material-ui/core";
+import Lottie from "react-lottie";
+import dashboardAnimData from "../assets/lottieFiles/17665-dashboard.json";
 import WithSizes from "react-sizes";
 
 const mapSizestoProps = ({ width, height }) => ({
@@ -15,7 +9,15 @@ const mapSizestoProps = ({ width, height }) => ({
   screenWidth: width
 });
 
-function HomeGrid1({ color, screenHeight, screenWidth }) {
+function HomeGrid3({ color, screenHeight, screenWidth }) {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: dashboardAnimData,
+    rendererSettings: {
+      preservedAspectRatio: "xMidYMid slice"
+    }
+  };
   return (
     <Grid
       container
@@ -31,7 +33,7 @@ function HomeGrid1({ color, screenHeight, screenWidth }) {
     >
       <Grid item xs={12} sm={12} md={6} lg={6}>
         <Hidden only={["xs", "sm"]}>
-          <Box style={{ marginLeft: 60, marginRight: 60 }}>
+          <Box style={{ marginLeft: 60, marginRight: 60, textAlign: "center" }}>
             <Typography variant="h4" style={{ color: "white" }}>
               With Warung-Q managing your own store is just a piece of cake. You
               can insert your product data, including stocks, price, or expired
@@ -45,17 +47,29 @@ function HomeGrid1({ color, screenHeight, screenWidth }) {
           </Box>
         </Hidden>
       </Grid>
-      <Grid item xs={12} sm={12} md={6} lg={6}>
-        <Card style={{ marginRight: 60, marginLeft: 60 }}>
+      <Grid
+        item
+        xs={12}
+        sm={12}
+        md={6}
+        lg={6}
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        <Lottie
+          options={defaultOptions}
+          height={screenHeight - 100}
+          style={{ maxWidth: 700 }}
+        />
+        {/* <Card style={{ marginRight: 60, marginLeft: 60 }}>
           <CardMedia
             image={photo1}
             title="market"
             style={{ height: screenHeight - 100, width: screenWidth }}
           />
-        </Card>
+        </Card> */}
       </Grid>
     </Grid>
   );
 }
 
-export default WithSizes(mapSizestoProps)(HomeGrid1);
+export default WithSizes(mapSizestoProps)(HomeGrid3);
