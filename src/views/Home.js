@@ -7,15 +7,12 @@ import Box from "@material-ui/core/Box";
 import Fab from "@material-ui/core/Fab";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import Zoom from "@material-ui/core/Zoom";
-import { orange } from "@material-ui/core/colors";
 import AppbarSignUp from "../components/AppbarSignUp";
 import HomeGrid1 from "../components/HomeGrid1";
 import HomeGrid2 from "../components/HomeGrid2";
 import HomeGrid3 from "../components/HomeGrid3";
 import HomeGrid4 from "../components/HomeGrid4";
 import Footer from "../components/Footer";
-
-const baseColor = orange[500];
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -72,17 +69,17 @@ export default function Home(props) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppbarSignUp color={baseColor} />
+      <AppbarSignUp color={props.color} />
       <Box my={1.5}>
-        <HomeGrid1 color={baseColor} />
-        <HomeGrid2 color={baseColor} />
-        <HomeGrid3 color={baseColor} />
-        <HomeGrid4 color={baseColor} />
-        <Footer color={baseColor} />
+        <HomeGrid1 color={props.color} />
+        <HomeGrid2 color={props.color} />
+        <HomeGrid3 color={props.color} />
+        <HomeGrid4 color={props.color} />
+        <Footer color={props.color} />
       </Box>
       <ScrollTop {...props}>
         <Fab
-          style={{ backgroundColor: baseColor, color: "white" }}
+          style={{ backgroundColor: props.color, color: "white" }}
           size="large"
           aria-label="scroll back to top"
         >
