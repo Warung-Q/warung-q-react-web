@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./views/Home";
 import SignIn from "./views/SignIn";
+import SignUp from "./views/SignUp";
 import "./App.css";
 import ColorContext from "./context/ColorContext";
 
@@ -16,6 +17,9 @@ function App() {
             </Route>
             <Route exact path="/signin">
               <SignIn color={value.color} />
+            </Route>
+            <Route exact path="/signup">
+              <SignUp color={value.color} />
             </Route>
           </Switch>
         </Router>

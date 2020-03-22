@@ -1,20 +1,20 @@
 import React from "react";
 import { Grid, Box, Typography } from "@material-ui/core";
 import Lottie from "react-lottie";
-import workingDashAnim from "../assets/lottieFiles/17436-working.json";
+import creatingAnim from "../assets/lottieFiles/17343-programming.json";
 import WithSizes from "react-sizes";
-import SignInForm from "./SignInForm";
+import SignUpForm from "./SignUpFormStepper";
 
 const mapSizestoProps = ({ width, height }) => ({
   screenHeight: height,
   screenWidth: width
 });
 
-function SignInGrid({ color, screenHeight, screenWidth }) {
+function SignUpGrid({ color, screenHeight, screenWidth }) {
   const defaultOptions = {
     loop: true,
     autoplay: true,
-    animationData: workingDashAnim,
+    animationData: creatingAnim,
     rendererSettings: {
       preservedAspectRatio: "xMidYMid slice"
     }
@@ -46,13 +46,14 @@ function SignInGrid({ color, screenHeight, screenWidth }) {
           <Lottie
             options={defaultOptions}
             height={screenHeight - 800}
-            style={{ maxWidth: 500 }}
+            style={{ maxWidth: 400 }}
           />
         </Grid>
         <Grid item xs={6}>
           <Box>
             <Typography variant="h6">
-              Sign in and manage your own market
+              Experience the easist way of managing your market. Sign up and
+              build your market management of your own.
             </Typography>
           </Box>
         </Grid>
@@ -68,11 +69,11 @@ function SignInGrid({ color, screenHeight, screenWidth }) {
         alignItems="center"
       >
         <Grid item>
-          <SignInForm color={color} />
+          <SignUpForm color={color} />
         </Grid>
       </Grid>
     </Grid>
   );
 }
 
-export default WithSizes(mapSizestoProps)(SignInGrid);
+export default WithSizes(mapSizestoProps)(SignUpGrid);

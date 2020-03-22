@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import AppbarSignUp from "../components/AppbarSignUp";
-import SignInGrid from "../components/SignInGrid";
+import SignUpGrid from "../components/SignUpGrid";
 import Footer from "../components/Footer";
 
-export default function SignInPage(props) {
+export default function SignUpPage(props) {
   useEffect(() => {
-    document.title = "Sign In - Warung-Q";
+    document.title = "Sign Up - Warung-Q";
   }, []);
   return (
     <>
       <AppbarSignUp color={props.color} />
-      <SignInGrid color={props.color} />
+      <SignUpGrid color={props.color} />
       <Footer color={props.color} />
     </>
   );
