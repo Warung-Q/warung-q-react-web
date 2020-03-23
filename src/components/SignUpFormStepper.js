@@ -5,9 +5,18 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import StepContent from "@material-ui/core/StepContent";
 import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import { FormControl, TextField, Box } from "@material-ui/core";
+import {
+  FormControl,
+  TextField,
+  Box,
+  CircularProgress
+} from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import setLoading from "../store/actionCreators/setLoadingAction";
+import setMessage from "../store/actionCreators/setMessageAction";
+import signUpAction from "../store/actionCreators/signUpAction";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,15 +44,13 @@ function getStepContent(
   setUsername,
   email,
   setEmail,
+  warungName,
+  setWarungName,
   password,
   setPassword,
   confirmPassword,
   setConfirmPassword
 ) {
-  //   const [username, setUsername] = React.useState("");
-  //   const [email, setEmail] = React.useState("");
-  //   const [password, setPassword] = React.useState("");
-  //   const [confirmPassword, setConfirmPassword] = React.useState("");
   switch (step) {
     case 0:
       return (
@@ -89,15 +96,16 @@ function getStepContent(
       return (
         <>
           <Typography variant="body2">
-            Input your warung name (default warung name will be your username
-            input from previous step).
+            Default warung name will be your username input from previous step.
+            If you desire to change your warung name, you can change it below.
           </Typography>
           <FormControl>
             <TextField
               type="text"
               label="Warung Name"
-              value={username}
-              onChange={event => setUsername(event.target.value)}
+              defaultValue={username}
+              value={warungName}
+              onChange={event => setWarungName(event.target.value)}
             />
           </FormControl>
         </>
@@ -115,6 +123,14 @@ function getStepContent(
                 type="text"
                 label="Username"
                 value={username}
+                disabled
+              />
+            </FormControl>
+            <FormControl>
+              <TextField
+                type="text"
+                label="Warung Name"
+                value={warungName ? warungName : username}
                 disabled
               />
             </FormControl>
@@ -141,22 +157,47 @@ export default function SignUpFormStepper({ color }) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [username, setUsername] = React.useState("");
+  const [warungName, setWarungName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
+  const { loading, message } = useSelector(
+    state => state.loadingMessageReducer
+  );
   const steps = getSteps();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleNext = () => {
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
+    if (activeStep === 0) {
+      if (password === confirmPassword) {
+        setActiveStep(activeStep + 1);
+      } else {
+      }
+    } else {
+      setActiveStep(activeStep + 1);
+    }
+  };
+
+  const handleSkip = () => {
+    setWarungName(username);
+    setActiveStep(activeStep + 1);
   };
 
   const handleBack = () => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
+    setActiveStep(activeStep - 1);
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
+  const handleSubmit = event => {
+    event.preventDefault();
+    dispatch(
+      signUpAction({ username, email, password, warung_name: warungName })
+    );
   };
+
+  // const handleReset = () => {
+  //   setActiveStep(0);
+  // };
 
   return (
     <div className={classes.root}>
@@ -170,6 +211,8 @@ export default function SignUpFormStepper({ color }) {
                   index,
                   username,
                   setUsername,
+                  warungName,
+                  setWarungName,
                   email,
                   setEmail,
                   password,
@@ -190,7 +233,7 @@ export default function SignUpFormStepper({ color }) {
                   {activeStep === 1 && (
                     <Button
                       variant="contained"
-                      onClick={handleNext}
+                      onClick={handleSkip}
                       className={classes.button}
                       style={{ color: "white", backgroundColor: color }}
                     >
@@ -199,26 +242,44 @@ export default function SignUpFormStepper({ color }) {
                   )}
                   <Button
                     variant="contained"
-                    onClick={handleNext}
+                    onClick={
+                      activeStep === steps.length - 1
+                        ? handleSubmit
+                        : handleNext
+                    }
                     className={classes.button}
+                    disabled={loading}
                     style={{ color: "white", backgroundColor: color }}
                   >
                     {activeStep === steps.length - 1 ? "Confirm" : "Next"}
                   </Button>
+                  {loading && (
+                    <CircularProgress
+                      size={24}
+                      style={{
+                        color: color,
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        marginTop: -12,
+                        marginLeft: -12
+                      }}
+                    />
+                  )}
                 </div>
               </div>
             </StepContent>
           </Step>
         ))}
       </Stepper>
-      {activeStep === steps.length && (
+      {/* {activeStep === steps.length && (
         <Paper square elevation={0} className={classes.resetContainer}>
           <Typography>All steps completed - you&apos;re finished</Typography>
           <Button onClick={handleReset} className={classes.button}>
             Reset
           </Button>
         </Paper>
-      )}
+      )} */}
     </div>
   );
 }
