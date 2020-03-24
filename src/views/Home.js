@@ -10,7 +10,8 @@ import Zoom from "@material-ui/core/Zoom";
 import AppbarSignUp from "../components/AppbarSignUp";
 import HomeGrid1 from "../components/HomeGrid1";
 import HomeGrid2 from "../components/HomeGrid2";
-import HomeGrid3 from "../components/HomeGrid3";
+import HomeGrid3A from "../components/HomeGrid3A";
+import HomeGrid3B from "../components/HomeGrid3B";
 import HomeGrid4 from "../components/HomeGrid4";
 // import Footer from "../components/Footer";
 
@@ -73,7 +74,8 @@ export default function Home(props) {
       <Box my={1.5}>
         <HomeGrid1 color={props.color} />
         <HomeGrid2 color={props.color} />
-        <HomeGrid3 color={props.color} />
+        <HomeGrid3A color={props.color} />
+        <HomeGrid3B color={props.color} />
         <HomeGrid4 color={props.color} />
         {/* <Footer color={props.color} /> */}
       </Box>

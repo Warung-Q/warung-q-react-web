@@ -14,9 +14,8 @@ import {
 } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import setLoading from "../store/actionCreators/setLoadingAction";
-import setMessage from "../store/actionCreators/setMessageAction";
 import signUpAction from "../store/actionCreators/signUpAction";
+import { ToastContainer, toast } from "react-toastify";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -162,9 +161,7 @@ export default function SignUpFormStepper({ color }) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
-  const { loading, message } = useSelector(
-    state => state.loadingMessageReducer
-  );
+  const { loading } = useSelector(state => state.loadingMessageReducer);
   const steps = getSteps();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -190,11 +187,30 @@ export default function SignUpFormStepper({ color }) {
   };
 
   const handleSubmit = async function(event) {
-    event.preventDefault();
-    await dispatch(
-      signUpAction({ username, email, password, warung_name: warungName })
-    );
-    history.push("/signin");
+    try {
+      event.preventDefault();
+      await dispatch(
+        signUpAction({ username, email, password, warung_name: warungName })
+      );
+      toast.success("Sign Up Success (^_^) Try sign in now", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true
+      });
+      history.push("/signin");
+    } catch (error) {
+      toast.error(error, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true
+      });
+    }
   };
 
   // const handleReset = () => {
@@ -203,6 +219,17 @@ export default function SignUpFormStepper({ color }) {
 
   return (
     <div className={classes.root}>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnVisibilityChange
+        draggable
+        pauseOnHover
+      />
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (
           <Step key={label}>
@@ -255,19 +282,19 @@ export default function SignUpFormStepper({ color }) {
                   >
                     {activeStep === steps.length - 1 ? "Confirm" : "Next"}
                   </Button>
-                  {loading && (
-                    <CircularProgress
-                      size={24}
-                      style={{
-                        color: color,
-                        position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        marginTop: -12,
-                        marginLeft: -12
-                      }}
-                    />
-                  )}
+                  {/* {loading && ( */}
+                  <CircularProgress
+                    size={24}
+                    style={{
+                      color: color,
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      marginTop: -12,
+                      marginLeft: -12
+                    }}
+                  />
+                  {/* )} */}
                 </div>
               </div>
             </StepContent>

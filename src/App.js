@@ -4,6 +4,7 @@ import Home from "./views/Home";
 import SignIn from "./views/SignIn";
 import SignUp from "./views/SignUp";
 import Dashboard from "./views/Dashboard";
+import PrivateRoute from "./PrivateRoute";
 import "./App.css";
 import ColorContext from "./context/ColorContext";
 import { Provider } from "react-redux";
@@ -19,15 +20,15 @@ function App() {
               <Route exact path="/">
                 <Home color={value.color} />
               </Route>
-              <Route exact path="/signin">
+              <PrivateRoute exact path="/signin">
                 <SignIn color={value.color} />
-              </Route>
-              <Route exact path="/signup">
+              </PrivateRoute>
+              <PrivateRoute exact path="/signup">
                 <SignUp color={value.color} />
-              </Route>
-              <Route exact path="/dashboard">
+              </PrivateRoute>
+              <PrivateRoute exact path="/dashboard">
                 <Dashboard />
-              </Route>
+              </PrivateRoute>
             </Switch>
           </Router>
         </Provider>

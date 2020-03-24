@@ -18,7 +18,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import DashboardComp from "../components/DashboardComponent";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import setOwnerAction from "../store/actionCreators/setOwnerAction";
 
 const drawerWidth = 240;
 
@@ -89,6 +90,11 @@ export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const email = useSelector(state => state.ownerReducer.email);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setOwnerAction(JSON.parse(localStorage.warung_q_token_data)));
+  }, [dispatch]);
 
   const handleDrawerOpen = () => {
     setOpen(true);

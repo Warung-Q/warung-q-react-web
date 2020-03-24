@@ -28,8 +28,8 @@ function SignInGrid({ color, screenHeight, screenWidth }) {
       alignItems="center"
       style={{
         backgroundColor: color,
-        height: screenHeight,
-        width: screenWidth
+        minHeight: screenHeight,
+        minWidth: screenWidth
       }}
     >
       <Grid
@@ -67,6 +67,7 @@ function SignInGrid({ color, screenHeight, screenWidth }) {
         justify="center"
         alignItems="center"
       >
+        {/* <SignInForm color={color} /> */}
         <Grid item>
           <SignInForm color={color} />
         </Grid>
