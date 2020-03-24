@@ -12,7 +12,7 @@ import HomeGrid1 from "../components/HomeGrid1";
 import HomeGrid2 from "../components/HomeGrid2";
 import HomeGrid3 from "../components/HomeGrid3";
 import HomeGrid4 from "../components/HomeGrid4";
-import Footer from "../components/Footer";
+// import Footer from "../components/Footer";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -75,8 +75,9 @@ export default function Home(props) {
         <HomeGrid2 color={props.color} />
         <HomeGrid3 color={props.color} />
         <HomeGrid4 color={props.color} />
-        <Footer color={props.color} />
+        {/* <Footer color={props.color} /> */}
       </Box>
+
       <ScrollTop {...props}>
         <Fab
           style={{ backgroundColor: props.color, color: "white" }}

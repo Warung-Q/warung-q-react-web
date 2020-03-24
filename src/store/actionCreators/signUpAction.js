@@ -8,10 +8,10 @@ const signUpAction = payload => {
     server
       .post("/owner/register", payload)
       .then(_ => {
-        setMessage(null);
+        dispatch(setMessage(null));
       })
-      .catch(({ response }) => {
-        dispatch(response.data.errors);
+      .catch(err => {
+        dispatch(setMessage(err.response.data.errors));
       })
       .finally(_ => {
         dispatch(setLoading(false));
