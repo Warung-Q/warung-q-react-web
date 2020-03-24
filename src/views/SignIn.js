@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import AppbarSignUp from "../components/AppbarSignUp";
 import SignInGrid from "../components/SignInGrid";
-import Footer from "../components/Footer";
+// import Footer from "../components/Footer";
 
 export default function SignInPage(props) {
   useEffect(() => {
@@ -11,7 +11,7 @@ export default function SignInPage(props) {
     <>
       <AppbarSignUp color={props.color} />
       <SignInGrid color={props.color} />
-      <Footer color={props.color} />
+      {/* <Footer color={props.color} /> */}
     </>
   );
 }

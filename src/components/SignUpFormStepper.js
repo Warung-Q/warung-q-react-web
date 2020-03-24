@@ -42,10 +42,10 @@ function getStepContent(
   step,
   username,
   setUsername,
-  email,
-  setEmail,
   warungName,
   setWarungName,
+  email,
+  setEmail,
   password,
   setPassword,
   confirmPassword,
@@ -55,8 +55,10 @@ function getStepContent(
     case 0:
       return (
         <>
-          <Typography variant="body2">Create your new data.</Typography>
-          <form>
+          <Typography variant="body2">
+            This is your first step to become good at managing your own market.
+          </Typography>
+          <form style={{ display: "flex", flexDirection: "column" }}>
             <FormControl>
               <TextField
                 type="text"
@@ -103,7 +105,6 @@ function getStepContent(
             <TextField
               type="text"
               label="Warung Name"
-              defaultValue={username}
               value={warungName}
               onChange={event => setWarungName(event.target.value)}
             />
@@ -117,7 +118,7 @@ function getStepContent(
             Please check your input data. Make sure your data is valid. Then you
             can confirm and start your management.
           </Typography>
-          <form>
+          <form style={{ display: "flex", flexDirection: "column" }}>
             <FormControl>
               <TextField
                 type="text"
@@ -130,7 +131,7 @@ function getStepContent(
               <TextField
                 type="text"
                 label="Warung Name"
-                value={warungName ? warungName : username}
+                value={warungName}
                 disabled
               />
             </FormControl>
@@ -188,11 +189,12 @@ export default function SignUpFormStepper({ color }) {
     setActiveStep(activeStep - 1);
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async function(event) {
     event.preventDefault();
-    dispatch(
+    await dispatch(
       signUpAction({ username, email, password, warung_name: warungName })
     );
+    history.push("/signin");
   };
 
   // const handleReset = () => {
