@@ -17,15 +17,16 @@ function HomeGrid3({ color, screenHeight, screenWidth }) {
       justify="center"
       alignItems="center"
       style={{
-        backgroundColor: "white",
-        height: screenHeight - 410
+        backgroundColor: color,
+        minHeight: screenHeight,
+        minWidth: screenWidth
       }}
     >
       <Grid item xs={12} container spacing={4}>
         <Grid item xs={12}>
           <Container>
             <Box style={{ textAlign: "center" }}>
-              <Typography variant="h4" style={{ color: color }}>
+              <Typography variant="h4" style={{ color: "white" }}>
                 We are welcome to anyone who are just started with their market
                 business. So, sign up for using our services. Together, we cand
                 build a more manageamble market for our own customers.
@@ -44,12 +45,12 @@ function HomeGrid3({ color, screenHeight, screenWidth }) {
             <Button
               variant="contained"
               style={{
-                backgroundColor: color
+                backgroundColor: "white"
               }}
             >
               <Link
                 to="/signup"
-                style={{ textDecoration: "none", color: "white" }}
+                style={{ textDecoration: "none", color: color }}
               >
                 Sign Up
               </Link>

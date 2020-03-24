@@ -28,8 +28,8 @@ function SignUpGrid({ color, screenHeight, screenWidth }) {
       alignItems="center"
       style={{
         backgroundColor: color,
-        height: screenHeight,
-        width: screenWidth
+        minHeight: screenHeight,
+        minWidth: screenWidth
       }}
     >
       <Grid

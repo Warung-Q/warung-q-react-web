@@ -5,17 +5,20 @@ import setMessage from "./setMessageAction";
 const signUpAction = payload => {
   return function(dispatch) {
     dispatch(setLoading(true));
-    server
-      .post("/owner/register", payload)
-      .then(_ => {
-        dispatch(setMessage(null));
-      })
-      .catch(err => {
-        dispatch(setMessage(err.response.data.errors));
-      })
-      .finally(_ => {
-        dispatch(setLoading(false));
-      });
+    return new Promise((resolve, reject) => {
+      server
+        .post("/owner/register", payload)
+        .then(_ => {
+          resolve();
+        })
+        .catch(err => {
+          dispatch(setMessage(err.response.data.errors));
+          reject(err.response.data.errors);
+        })
+        .finally(_ => {
+          dispatch(setLoading(false));
+        });
+    });
   };
 };
 
