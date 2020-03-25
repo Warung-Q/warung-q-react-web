@@ -28,7 +28,10 @@ export default function PrivateRoute({ children, ...rest }) {
           } else {
             return (
               <Redirect
-                to={{ pathname: "/dashboard", state: { from: location } }}
+                to={{
+                  pathname: "/dashboard/summary",
+                  state: { from: location }
+                }}
               />
             );
           }

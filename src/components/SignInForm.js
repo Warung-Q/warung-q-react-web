@@ -31,7 +31,7 @@ export default function SignInForm({ color }) {
         })
       );
 
-      history.push("/dashboard/home");
+      history.push("/dashboard/summary");
     } catch (error) {
       toast.error(error, {
         position: "top-center",

@@ -217,7 +217,7 @@ export default function Dahsboard({ color }) {
               to={`${menu.path}`}
               style={{ textDecoration: "none", color: "black" }}
             >
-              <ListItem button key={menu.name}>
+              <ListItem button key={index}>
                 <ListItemIcon>{menu.icon}</ListItemIcon>
                 <ListItemText primary={menu.name} />
               </ListItem>
@@ -228,18 +228,7 @@ export default function Dahsboard({ color }) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         {params === "summary" && <DashboardComp />}
-        {params === "products" && <Products />}
-
-        {/* <Switch>
-          <Route exact path={`${path}/home`}>
-            <DashboardComp />
-            <Products />
-          </Route>
-          <Route path={`/dashboard/products`}>
-            <Products />
-            <h1>Masuk products</h1>
-          </Route>
-        </Switch> */}
+        {params === "products" && <Products color={color} />}
       </main>
     </div>
   );
