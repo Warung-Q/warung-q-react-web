@@ -4,12 +4,14 @@ import loadingMessageReducer from "./reducers/loadingMessageReducer";
 import ownerReducer from "./reducers/ownerReducer";
 import productsReducer from "./reducers/productsReducer";
 import categoriesReducer from "./reducers/categoriesReducer";
+import transactionsReducer from "./reducers/transactionsReducer";
 
 const reducers = combineReducers({
   loadingMessageReducer,
   ownerReducer,
   productsReducer,
-  categoriesReducer
+  categoriesReducer,
+  transactionsReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

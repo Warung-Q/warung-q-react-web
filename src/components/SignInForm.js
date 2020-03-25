@@ -7,7 +7,8 @@ import {
   CardContent,
   CardActions,
   Button,
-  CircularProgress
+  CircularProgress,
+  Typography
 } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import signInAction from "../store/actionCreators/signInAction";
@@ -79,32 +80,35 @@ export default function SignInForm({ color }) {
                 onChange={event => setPassword(event.target.value)}
               />
             </FormControl>
+
             <CardActions>
               <Button
                 variant="contained"
                 style={{
                   color: "white",
-                  backgroundColor: color,
+                  backgroundColor: loading ? "grey" : color,
                   width: 280
                 }}
                 type="submit"
+                disabled={loading}
               >
                 Sign In
               </Button>
-              {loading && (
+            </CardActions>
+            {loading && (
+              <CardActions>
+                <Typography variant="h6" style={{ color: color }}>
+                  Loading
+                </Typography>
                 <CircularProgress
                   size={24}
                   style={{
                     color: color,
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    marginTop: -12,
-                    marginLeft: -12
+                    position: "relative"
                   }}
                 />
-              )}
-            </CardActions>
+              </CardActions>
+            )}
           </form>
         </CardContent>
       </Card>

@@ -12,8 +12,8 @@ const signUpAction = payload => {
           resolve();
         })
         .catch(err => {
-          dispatch(setMessage(err.response.data.errors));
           reject(err.response.data.errors);
+          dispatch(setMessage(err.response.data.errors));
         })
         .finally(_ => {
           dispatch(setLoading(false));

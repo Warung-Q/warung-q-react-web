@@ -278,23 +278,26 @@ export default function SignUpFormStepper({ color }) {
                     }
                     className={classes.button}
                     disabled={loading}
-                    style={{ color: "white", backgroundColor: color }}
+                    style={{
+                      color: "white",
+                      backgroundColor: loading ? "grey" : color
+                    }}
                   >
                     {activeStep === steps.length - 1 ? "Confirm" : "Next"}
                   </Button>
-                  {/* {loading && ( */}
-                  <CircularProgress
-                    size={24}
-                    style={{
-                      color: color,
-                      position: "absolute",
-                      top: "50%",
-                      left: "50%",
-                      marginTop: -12,
-                      marginLeft: -12
-                    }}
-                  />
-                  {/* )} */}
+                  {loading && (
+                    <Button disabled variant="outlined">
+                      <Typography variant="body1" style={{ color: color }}>
+                        Loading
+                      </Typography>
+                      <CircularProgress
+                        size={24}
+                        style={{
+                          color: color
+                        }}
+                      />
+                    </Button>
+                  )}
                 </div>
               </div>
             </StepContent>
