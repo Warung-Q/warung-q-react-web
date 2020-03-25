@@ -15,11 +15,17 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import DashboardComp from "../components/DashboardComponent";
+import Products from "../components/Products";
 import { useSelector, useDispatch } from "react-redux";
 import setOwnerAction from "../store/actionCreators/setOwnerAction";
+import { ToastContainer, toast } from "react-toastify";
+import {
+  Timeline as TimelineIcon,
+  List as ListIcon,
+  Store as StoreIcon
+} from "@material-ui/icons/";
+import { Link, useParams } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -85,16 +91,49 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function MiniDrawer() {
+export default function Dahsboard({ color }) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const email = useSelector(state => state.ownerReducer.email);
+  const { username, warung_name } = useSelector(state => state.ownerReducer);
   const dispatch = useDispatch();
+  const { params } = useParams();
+
+  const drawerMenu = [
+    {
+      name: "Dashboard",
+      icon: <TimelineIcon />,
+      path: "summary"
+    },
+    {
+      name: "Products",
+      icon: <ListIcon />,
+      path: "products"
+    },
+    {
+      name: "Store",
+      icon: <StoreIcon />,
+      path: "store"
+    }
+  ];
 
   useEffect(() => {
     dispatch(setOwnerAction(JSON.parse(localStorage.warung_q_token_data)));
-  }, [dispatch]);
+    toastWelcome(username);
+  }, [dispatch, username]);
+
+  const toastWelcome = user => {
+    if (user) {
+      toast.success(`Welcome, ${user}. Happy Managing`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true
+      });
+    }
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -111,11 +150,23 @@ export default function MiniDrawer() {
   return (
     <div className={classes.root}>
       <CssBaseline />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnVisibilityChange
+        draggable
+        pauseOnHover
+      />
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open
         })}
+        style={{ backgroundColor: color }}
       >
         <Toolbar>
           <IconButton
@@ -130,7 +181,7 @@ export default function MiniDrawer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Mini variant drawer
+            {warung_name}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -148,7 +199,7 @@ export default function MiniDrawer() {
         }}
       >
         <div className={classes.toolbar}>
-          <Typography variant="h6">{email}</Typography>
+          <Typography variant="h6">{username}</Typography>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
@@ -161,30 +212,34 @@ export default function MiniDrawer() {
         </div>
         <Divider />
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
+          {drawerMenu.map((menu, index) => (
+            <Link
+              to={`${menu.path}`}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <ListItem button key={menu.name}>
+                <ListItemIcon>{menu.icon}</ListItemIcon>
+                <ListItemText primary={menu.name} />
+              </ListItem>
+            </Link>
           ))}
         </List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <DashboardComp />
+        {params === "summary" && <DashboardComp />}
+        {params === "products" && <Products />}
+
+        {/* <Switch>
+          <Route exact path={`${path}/home`}>
+            <DashboardComp />
+            <Products />
+          </Route>
+          <Route path={`/dashboard/products`}>
+            <Products />
+            <h1>Masuk products</h1>
+          </Route>
+        </Switch> */}
       </main>
     </div>
   );

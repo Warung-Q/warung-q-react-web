@@ -30,15 +30,8 @@ export default function SignInForm({ color }) {
           password
         })
       );
-      toast.success("Sign In Sucess. Happy Managing", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true
-      });
-      history.push("/dashboard");
+
+      history.push("/dashboard/home");
     } catch (error) {
       toast.error(error, {
         position: "top-center",
