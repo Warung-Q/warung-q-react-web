@@ -17,6 +17,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import DashboardComp from "../components/DashboardComponent";
 import Products from "../components/Products";
+import Store from "../components/Store";
 import { useSelector, useDispatch } from "react-redux";
 import setOwnerAction from "../store/actionCreators/setOwnerAction";
 import { ToastContainer, toast } from "react-toastify";
@@ -228,8 +229,9 @@ export default function Dahsboard({ color }) {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {params === "summary" && <DashboardComp />}
+        {params === "summary" && <DashboardComp color={color} />}
         {params === "products" && <Products color={color} />}
+        {params === "store" && <Store color={color} />}
       </main>
     </div>
   );

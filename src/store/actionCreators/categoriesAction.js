@@ -13,18 +13,13 @@ export default function categoriesAction(payload) {
         }
       })
       .then(({ data }) => {
-        // resolve();
-
         dispatch(setCategoriesAction(data));
       })
       .catch(err => {
-        // reject(err.response.data.errors);
         dispatch(setMessage(err.response.data.errors));
       })
       .finally(_ => {
         dispatch(setLoading(false));
       });
-    // return new Promise((resolve, reject) => {
-    // });
   };
 }

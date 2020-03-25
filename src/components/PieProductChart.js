@@ -31,7 +31,7 @@ export default function PieProductChart({ warungDatasets, products }) {
 
   return (
     <Card style={{ minHeight: 425 }}>
-      <CardHeader title="Products Summary" />
+      <CardHeader title="Yearly Products Sold" />
       <CardContent>
         <Pie
           data={data}

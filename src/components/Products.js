@@ -22,6 +22,7 @@ import editProductAction from "../store/actionCreators/editProductAction";
 import deleteProductAction from "../store/actionCreators/deleteProductAction";
 import categoriesAction from "../store/actionCreators/categoriesAction";
 import { ToastContainer, toast } from "react-toastify";
+import ProductsSkeleton from "./ProductsSkeleton";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -207,7 +208,7 @@ export default function Products({ color }) {
     }
   };
 
-  if (loading) return <h1>Loading...</h1>;
+  if (loading) return <ProductsSkeleton />;
   return (
     <>
       <ToastContainer

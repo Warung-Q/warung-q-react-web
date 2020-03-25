@@ -4,7 +4,7 @@ import SalesChart from "./SalesChart";
 import PieProductChart from "./PieProductChart";
 import transactionsAction from "../store/actionCreators/transactionsAction";
 import productsAction from "../store/actionCreators/productsAction";
-
+import DashboardCompSkeleton from "./DashboardCompSkeleton";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function DahsboardComponent() {
@@ -23,11 +23,7 @@ export default function DahsboardComponent() {
     dispatch(productsAction(access_token));
     dispatch(transactionsAction(access_token));
   }, [access_token, dispatch]);
-  // transactions.forEach(item => {
-  //   console.log(new Date(item.createdAt).getMonth(), new Date().getMonth());
-  // });
-  if (loading) return <h1>Loading...</h1>;
-  // if (!loading)
+  if (loading) return <DashboardCompSkeleton />;
   return (
     <Grid container spacing={5}>
       <Grid item xs={12} sm={12} md={7} lg={7}>
