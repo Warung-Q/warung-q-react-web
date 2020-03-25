@@ -26,8 +26,8 @@ function App() {
               <PrivateRoute exact path="/signup">
                 <SignUp color={value.color} />
               </PrivateRoute>
-              <PrivateRoute exact path="/dashboard">
-                <Dashboard />
+              <PrivateRoute path="/dashboard/:params">
+                <Dashboard color={value.color} />
               </PrivateRoute>
             </Switch>
           </Router>

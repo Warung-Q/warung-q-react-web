@@ -5,8 +5,11 @@ export default function PrivateRoute({ children, ...rest }) {
   return (
     <Route
       {...rest}
-      render={({ location }) => {
-        if (location.pathname === "/dashboard") {
+      render={({ location, match }) => {
+        if (
+          location.pathname === "/dashboard" ||
+          location.pathname === `/dashboard/${match.params.params}`
+        ) {
           if (localStorage.getItem("warung_q_token_data")) {
             return children;
           } else {
