@@ -3,11 +3,13 @@ import thunk from "redux-thunk";
 import loadingMessageReducer from "./reducers/loadingMessageReducer";
 import ownerReducer from "./reducers/ownerReducer";
 import productsReducer from "./reducers/productsReducer";
+import categoriesReducer from "./reducers/categoriesReducer";
 
 const reducers = combineReducers({
   loadingMessageReducer,
   ownerReducer,
-  productsReducer
+  productsReducer,
+  categoriesReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

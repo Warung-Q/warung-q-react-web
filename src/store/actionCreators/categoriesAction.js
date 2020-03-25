@@ -1,20 +1,21 @@
 import server from "../../api";
 import setLoading from "./setLoadingAction";
 import setMessage from "./setMessageAction";
-import setProductsAction from "./setProductsAction";
+import setCategoriesAction from "./setCategoriesAction";
 
-export default function productsAction(token) {
+export default function categoriesAction(payload) {
   return function(dispatch) {
     dispatch(setLoading(true));
     server
-      .get("/products", {
+      .get("/categories", {
         headers: {
-          access_token: token
+          access_token: payload
         }
       })
       .then(({ data }) => {
         // resolve();
-        dispatch(setProductsAction(data.products));
+
+        dispatch(setCategoriesAction(data));
       })
       .catch(err => {
         // reject(err.response.data.errors);
