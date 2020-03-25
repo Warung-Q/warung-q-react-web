@@ -214,10 +214,11 @@ export default function Dahsboard({ color }) {
         <List>
           {drawerMenu.map((menu, index) => (
             <Link
+              key={index}
               to={`${menu.path}`}
               style={{ textDecoration: "none", color: "black" }}
             >
-              <ListItem button key={index}>
+              <ListItem button>
                 <ListItemIcon>{menu.icon}</ListItemIcon>
                 <ListItemText primary={menu.name} />
               </ListItem>
